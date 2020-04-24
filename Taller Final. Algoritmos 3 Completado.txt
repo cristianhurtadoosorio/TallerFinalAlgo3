@@ -1,0 +1,347 @@
+Proceso TablaDeResultadosLiga
+	
+	Definir pjugados, pganados, puntos, i, pperdidos, pempatados, emp, perd, contador1, contador2, j, p, pj, pg, pe, pp como Numerico;
+	Definir equipo, respuestaMenu, nombre, respuesta, e como Texto;
+	Definir menuPrincipal, accion como Logico;
+	
+	Dimension equipo[16];
+	Dimension pjugados[16];
+	Dimension pganados[16];
+	Dimension pempatados[16];
+	Dimension pperdidos[16];
+	Dimension puntos[16];
+	
+	
+	equipo[0] = "VALLEDUPAR";
+	equipo[1] = "UNIVERSITARIO DE POPAYAN";
+	equipo[2] = "UNION MAGDALENA";
+	equipo[3] = "REAL SANTANDER";
+	equipo[4] = "REAL CARTAGENA";
+	equipo[5] = "QUINDIO";
+	equipo[6] = "PEREIRA";
+	equipo[7] = "ORSOMARSO SC";
+	equipo[8] = "LLANEROS FC";
+	equipo[9] = "LEONES";
+	equipo[10] = "FORTALEZA C.E.I.F";
+	equipo[11] = "CUCUTA";
+	equipo[12] = "BOYACA CHICO";
+	equipo[13] = "BOGOTA FC";
+	equipo[14] = "BARRANQUILLA F.C.";
+	equipo[15] = "ATLETICO FC";
+	
+	pjugados[0] = 12;
+	pjugados[1] = 11;
+	pjugados[2] = 11;
+	pjugados[3] = 10;
+	pjugados[4] = 11;
+	pjugados[5] = 10;
+	pjugados[6] = 11;
+	pjugados[7] = 11;
+	pjugados[8] = 11;
+	pjugados[9] = 11;
+	pjugados[10] = 11;
+	pjugados[11] = 11;
+	pjugados[12] = 11;
+	pjugados[13] = 11;
+	pjugados[14] = 11;
+	pjugados[15] = 10;
+	
+	pganados[0] = 4;
+	pganados[1] = 2;
+	pganados[2] = 4;
+	pganados[3] = 6;
+	pganados[4] = 1;
+	pganados[5] = 5;
+	pganados[6] = 7;
+	pganados[7] = 5;
+	pganados[8] = 6;
+	pganados[9] = 5;
+	pganados[10] = 4;
+	pganados[11] = 3;
+	pganados[12] = 4;
+	pganados[13] = 2;
+	pganados[14] = 5;
+	pganados[15] = 2;
+	
+	puntos[0] = 13;
+	puntos[1] = 10;
+	puntos[2] = 14;
+	puntos[3] = 20;
+	puntos[4] = 6;
+	puntos[5] = 17;
+	puntos[6] = 24;
+	puntos[7] = 18;
+	puntos[8] = 20;
+	puntos[9] = 16;
+	puntos[10] = 16;
+	puntos[11] = 14;
+	puntos[12] = 16;
+	puntos[13] = 8;
+	puntos[14] = 17;
+	puntos[15] = 10;
+	
+	contador1=0;
+	
+	Para i=0 Hasta 15 con paso 1 Hacer
+		
+		emp = pganados[i] * 3;
+		pempatados[i]=puntos[i] - emp;
+		
+	FinPara
+	
+	Para i=0 Hasta 15 con paso 1 Hacer
+		
+		perd=pganados[i] + pempatados[i];
+		pperdidos[i] = pjugados[i] - perd;
+		
+		contador1=contador1+1;
+		
+	FinPara
+	
+	menuPrincipal = Verdadero;
+	Mientras menuPrincipal = Verdadero Hacer
+		
+		Limpiar Pantalla;
+		
+		Escribir"MENU PRINCIPAL";
+		Escribir"";
+		Escribir"1.Tabla de posiciones";
+		Escribir"2.Equipos con más partidos empatados";
+		Escribir"3.Equipos con más partidos perdidos";
+		Escribir"4.Buscar información de un equipo";
+		Escribir"5.Salir";
+		Leer respuestaMenu;
+		
+		Segun respuestaMenu Hacer
+			
+			"1":
+				Limpiar Pantalla;
+				
+				Escribir"TABLA DE POSICIONES";
+				Escribir"";
+				Escribir "PJugados","  ","PGanados","  ","PEmpatados","  ","PPerdidos","  ","Puntos","  ","Equipo";
+				Escribir"";
+				
+				Para i=0 hasta 15 hacer
+					para j=0 hasta 15 hacer
+						si puntos[i]> puntos[j] Entonces
+							
+							p=puntos[i];
+							puntos[i]=puntos[j];
+							puntos[j]=p;
+							
+							pp=pperdidos[i];
+							pperdidos[i]=pperdidos[j];
+							pperdidos[j]=pp;
+							
+							pe=pempatados[i];
+							pempatados[i]=pempatados[j];
+							pempatados[j]=pe;
+							
+							e=equipo[i];
+							equipo[i]=equipo[j];
+							equipo[j]=e;
+							
+							pg=pganados[i];
+							pganados[i]=pganados[j];
+							pganados[j]=pg;
+							
+							pj=pjugados[i];
+							pjugados[i]=pjugados[j];
+							pjugados[j]=pj;
+							
+						FinSi	
+						
+					Finpara	
+					
+				FinPara
+				
+				Para i=0 hasta 15 con Paso 1 Hacer
+					
+					Escribir "  ",pjugados[i],"         ",pganados[i],"          ",pempatados[i],"          ",pperdidos[i],"         ",puntos[i],"     ",equipo[i];
+					
+					
+				FinPara
+				
+				Escribir"";
+				Escribir"";
+				Escribir"M.Para Menu Principal.";
+				Escribir"S.Para Salir.";
+				Leer respuesta;
+				
+				respuesta = Mayusculas(respuesta);
+				
+				Si respuesta = "M" entonces
+					
+					menuPrincipal = Verdadero;
+					
+				SiNo
+					
+					menuPrincipal = Falso;
+					Escribir"GRACIAS POR VER LOS RESULTADOS DE LA LIGA";
+					
+				FinSi
+				
+			"2":
+				Limpiar Pantalla;
+				
+				Escribir "EQUIPO CON MAS EMPATES";
+				
+				Para i=0 Hasta 15 con paso 1 Hacer
+					
+					Si 5 = pempatados[i] Entonces
+						
+						Escribir"";
+						Escribir"El equipo con más partidos empatados es: ",equipo[i]," con ",pempatados[i];
+						
+					FinSi
+					
+				FinPara
+				
+				Escribir"";
+				Escribir"";
+				Escribir"M.Para Menu Principal.";
+				Escribir"S.Para Salir.";
+				Leer respuesta;
+				
+				respuesta = Mayusculas(respuesta);
+				
+				Si respuesta = "M" entonces
+					
+					menuPrincipal = Verdadero;
+					
+				SiNo
+					
+					menuPrincipal = Falso;
+					Escribir"GRACIAS POR VER LOS RESULTADOS DE LA LIGA";
+					
+				FinSi
+				
+			"3":
+				Limpiar Pantalla;
+				
+				Escribir "EQUIPOS CON MAS PARTIDOS PERDIDOS";
+				
+				Para i=0 Hasta 15 con paso 1 Hacer
+					
+					Si 7 = pperdidos[i] entonces
+						
+						Escribir"";
+						Escribir equipo[i]," con ",pperdidos[i]; 
+						
+					FinSi
+					
+					
+				FinPara
+				
+				Escribir"";
+				Escribir"";
+				Escribir"M.Para Menu Principal.";
+				Escribir"S.Para Salir.";
+				Leer respuesta;
+				
+				respuesta = Mayusculas(respuesta);
+				
+				Si respuesta = "M" entonces
+					
+					menuPrincipal = Verdadero;
+					
+				SiNo
+					
+					menuPrincipal = Falso;
+					Escribir"GRACIAS POR VER LOS RESULTADOS DE LA LIGA";
+					
+				FinSi
+				
+			"4":
+				accion = Verdadero;
+				Mientras accion = Verdadero Hacer
+					
+					Limpiar Pantalla;
+					Escribir"INFORMACIÓN DE EQUIPOS";
+					Escribir"";
+					Escribir"Ingresa el nombre del equipo para ver la información.";
+					Leer nombre;
+					
+					nombre = Mayusculas(nombre);
+					
+					contador2=0;
+					
+					Para i=0 Hasta 15 hacer
+						
+						Si nombre = equipo[i] Entonces
+							
+							Escribir"";
+							Escribir "PJugados","  ","PGanados","  ","PEmpatados","  ","PPerdidos","  ","Puntos";
+							Escribir"";
+							
+							Escribir "  ",pjugados[i],"         ",pganados[i],"          ",pempatados[i],"          ",pperdidos[i],"         ",puntos[i],;
+							
+						SiNo
+							
+							contador2=contador2+1;
+							
+						FinSi
+						
+					FinPara
+					
+					Si contador2 = contador1 Entonces
+						
+						Escribir"";
+						Escribir"EL EQUIPO NO SE ENCUENTRA EN LA LIGA";
+						
+					FinSi
+					
+					Escribir"";
+					Escribir"";
+					Escribir"";
+					Escribir"QUÉ DESEAS HACER ?";
+					Escribir"";
+					Escribir"1.Buscar otro equipo.";
+					Escribir"2.Ir al menu principal";
+					Escribir"3.Salir";
+					Leer respuesta;
+					
+					Segun respuesta Hacer
+						
+						"1":
+							accion = Verdadero;
+							
+						"2":
+							accion = Falso;
+							menuPrincipal = Verdadero;
+							
+						"3":
+							accion = Falso;
+							menuPrincipal = Falso;
+							Escribir"GRACIAS POR VER LOS RESULTADOS DE LA LIGA";
+							
+							De Otro Modo
+							
+							accion = Falso;
+							menuPrincipal = Falso;
+							Escribir"OPCION INCORRECTA";
+							
+							
+					FinSegun
+					
+				FinMientras
+				
+				
+			"5":
+				Limpiar Pantalla;
+				menuPrincipal = Falso;
+				Escribir"GRACIAS POR VER LOS RESULTADOS DE LA LIGA";
+				
+				De Otro Modo
+				
+				Limpiar Pantalla;
+				menuPrincipal = Falso;
+				Escribir"OPCION NO VALIDA";
+				
+		FinSegun
+		
+	FinMientras
+	
+FinProceso
+
